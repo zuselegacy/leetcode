@@ -13,7 +13,7 @@ public:
         reverse(s,0,s.size()-1);
         int start = 0;
         for(int i=0;i<s.size();i++) {
-            if(s[i] == ' ' || i==s.size()-1) {
+            if(s[i] == ' ') {
                 reverse(s,start,i-1);
                 start = i + 1;
             }            
