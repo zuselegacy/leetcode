@@ -6,19 +6,18 @@ public:
         int sum=0;
         int left=0,right=0;
         int minLen = INT_MAX;
-                
+
         while(right<nums.size()) {
             sum = sum + nums[right];
-            if(sum >=s) {
-                //minLen = min(minLen,right-left+1);
-                while(sum>=s) {
-                    sum = sum - nums[left];
-                    left++;                    
-                }
-                minLen = min(minLen,right-left+2);                
+	    // while valid condition, optimize the window to minimize
+            while(sum>=s) {
+		// update state is inside loop not outside
+                minLen = min(minLen,right-left+1);
+                sum = sum - nums[left];
+                left++;
             }
-            right++;            
+            right++;
         }
-        return minLen==INT_MAX?0:minLen;                  
+        return minLen==INT_MAX?0:minLen;
     }
 };
