@@ -12,28 +12,29 @@
 #include<string>
 class Solution {
 public:
-    bool checkSubTree(TreeNode* main,TreeNode* sub) {
-       if(main == NULL && sub == NULL) 
+    bool compareTree(TreeNode* tree1,TreeNode* tree2) {
+       if(tree1 == NULL && tree2 == NULL) 
            return true;
-        else if(main == NULL || sub==NULL)
+        else if(tree1 == NULL || tree2==NULL)
            return false;
         else                          
-           return (main->val == sub->val) && checkSubTree(main->left,sub->left) && checkSubTree(main->right,sub->right);        
+           return (tree1->val == tree2->val) && compareTree(tree1->left,tree2->left) && compareTree(tree1->right, tree2->right);        
     }
     
-    bool traverse(TreeNode* s, TreeNode* t) {
-        if(checkSubTree(s,t))
+    bool traverseAndCompare(TreeNode* s, TreeNode* t) {
+        if(compareTree(s,t))
             return true;
         if(s) {            
-            if(traverse(s->left,t))
+            if(traverseAndCompare(s->left,t))
                 return true;                
-            if(traverse(s->right,t))
+            if(traverseAndCompare(s->right,t))
                 return true;
         }
-        return false;        
+        return false;      
     }
     
     bool isSubtree(TreeNode* s, TreeNode* t) {
-       return traverse(s,t);
+        
+       return traverseAndCompare(s,t);
     }
 };
